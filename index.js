@@ -34,6 +34,7 @@ const DataByCountry = async () => {
 
     const response = await fetch_country.json();
     const country = response.map((data) => data);
+    console.log("country",country)
     return { country: country, token: token };
 }
 
@@ -48,7 +49,7 @@ const DataByState = async () => {
         return data.country_name
     })
     const bearer = country?.token?.auth_token
-    const fetch_state = await fetch(`https://www.universal-tutorial.com/api/states/${countryname[163]}`, {
+    const fetch_state = await fetch(`https://www.universal-tutorial.com/api/states/${countryname[229]  }`, {
         headers: {
             "Accept": "application/json",
             "Authorization": "Bearer " + `${bearer}`
@@ -56,6 +57,7 @@ const DataByState = async () => {
     });
     const resp = await fetch_state.json();
     const state = resp.map((data) => data.state_name);
+    console.log("state",state)
     return { state: state, bearer: bearer };
 }
 
@@ -70,13 +72,14 @@ const DataByCity = async () => {
     const states = state.state.map((data) => {
         return data;
     })
-    const fetch_city = await fetch(`https://www.universal-tutorial.com/api/cities/${states[6]}`, {
+    const fetch_city = await fetch(`https://www.universal-tutorial.com/api/cities/${states[32]}`, {
         headers: {
             "Accept": "application/json",
             "Authorization": "Bearer " + `${bearer}`
         }
     });
     const city = await fetch_city.json();
+    console.log("city",city)
     const resp = city
         .filter((data) => {
             if (data.length < 1) {
@@ -95,7 +98,7 @@ const DataByCity = async () => {
 // Getting City Data Function end here
 
 
-DataByCity().then((data) => console.log(data))
+DataByCity().then((data) => console.log("final check",data))
 
 
 
